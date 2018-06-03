@@ -9,9 +9,10 @@ import QuestionTypeChooser from './elements/QuestionTypeChooser'
 import QuestionTypePicker from './elements/QuestionTypePicker'
 import EssayQuestion from './elements/EssayQuestion'
 import { createStackNavigator } from 'react-navigation'
-
+import ScreenX from './elements/ScreenX'
 
 class Home extends  React.Component {
+    static navigationOptions = { title: 'Home' };
     constructor(props) {
         super(props);
     }
@@ -26,6 +27,11 @@ class Home extends  React.Component {
                 <Button title="Go to Screen B"
                         onPress={() => this.props.navigation
                             .navigate('ScreenB') } />
+                <Button
+                    title="Go to Screen X"
+                    onPress={() =>
+                        this.props.navigation.navigate('ScreenX', {parameter: 'Welcome'})
+                    }/>
                 <QuestionTypeChooser/>
                 <QuestionTypePicker/>
                 <EssayQuestion/>
@@ -41,6 +47,7 @@ class Home extends  React.Component {
     }
 }
 class ScreenA extends  React.Component {
+     static navigationOptions = { title: 'ScreenA' };
     constructor(props) {
         super(props);
     }
@@ -48,12 +55,17 @@ class ScreenA extends  React.Component {
         return (
             <ScrollView>
                 <Text h3>Screen A</Text>
+                <Button title="Go Home"
+                        onPress={() =>this.props
+                            .navigation
+                            .navigate('Home')} />
             </ScrollView>
         );
     }
 }
 
 class ScreenB extends  React.Component {
+    static navigationOptions = { title: 'ScreenB' };
     constructor(props) {
         super(props);
     }
@@ -61,16 +73,21 @@ class ScreenB extends  React.Component {
         return (
             <ScrollView>
                 <Text h3>Screen B</Text>
+                <Button title="Go Home"
+                        onPress={() =>this.props
+                            .navigation
+                            .goBack()} />
             </ScrollView>
         );
     }
 }
 
 const App = createStackNavigator({
-    Home: { screen: Home },
-    ScreenA: { screen: ScreenA },
-    ScreenB: { screen: ScreenB }
-});
+    Home,
+    ScreenA,
+    ScreenB,
+    ScreenX
+}, { initialRouteName: 'Home' });
 
 
 export default App
