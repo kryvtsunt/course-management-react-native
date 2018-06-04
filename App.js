@@ -1,93 +1,103 @@
 import React from 'react';
-import { StyleSheet,View, StatusBar, ScrollView} from 'react-native';
-import {Text, Divider, ListItem, Button} from 'react-native-elements'
+import { StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native';
 import FixedHeader from './elements/FixedHeader'
 import TextHeadings from './elements/TextHeadings'
 import Icons from './elements/Icons'
 import Exam from './elements/Exam'
 import QuestionTypeChooser from './elements/QuestionTypeChooser'
 import QuestionTypePicker from './elements/QuestionTypePicker'
+import TrueFalseQuestionEditor from './elements/TrueFalseQuestionEditor'
+import TopicList from './components/TopicList'
 import EssayQuestion from './elements/EssayQuestion'
 import { createStackNavigator } from 'react-navigation'
+import {Button} from 'react-native-elements'
 import ScreenX from './elements/ScreenX'
+import CourseList from './components/CourseList'
+import ModuleList from './components/ModuleList'
+import LessonList from './components/LessonList'
+import WidgetList from './components/WidgetList'
+import QuestionList from './components/QuestionList'
 
-class Home extends  React.Component {
-    static navigationOptions = { title: 'Home' };
+class Home extends React.Component {
+    static navigationOptions = {
+        title: 'Home'
+    }
     constructor(props) {
-        super(props);
+        super(props)
     }
     render() {
-        return (
+        return(
             <ScrollView>
-                <StatusBar hidden= {true} barStyle="light-content"/>
+                <StatusBar barStyle="light-content"/>
                 <FixedHeader/>
+
+                <Button title="Courses"
+                        onPress={() => this.props.navigation
+                            .navigate('CourseList') } />
+                <Button title="Go to Screen X"
+                        onPress={() => this.props.navigation
+                            .navigate('ScreenX') } />
                 <Button title="Go to Screen A"
                         onPress={() => this.props.navigation
                             .navigate('ScreenA') } />
                 <Button title="Go to Screen B"
                         onPress={() => this.props.navigation
                             .navigate('ScreenB') } />
-                <Button
-                    title="Go to Screen X"
-                    onPress={() =>
-                        this.props.navigation.navigate('ScreenX', {parameter: 'Welcome'})
-                    }/>
+
+
+                <TrueFalseQuestionEditor/>
+
                 <QuestionTypeChooser/>
                 <QuestionTypePicker/>
-                <EssayQuestion/>
+
                 <Exam/>
+
                 <Icons/>
                 <View style={{padding: 20}}>
                     <TextHeadings/>
                 </View>
-
-
             </ScrollView>
-        );
-    }
-}
-class ScreenA extends  React.Component {
-     static navigationOptions = { title: 'ScreenA' };
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <ScrollView>
-                <Text h3>Screen A</Text>
-                <Button title="Go Home"
-                        onPress={() =>this.props
-                            .navigation
-                            .navigate('Home')} />
-            </ScrollView>
-        );
+        )
     }
 }
 
-class ScreenB extends  React.Component {
-    static navigationOptions = { title: 'ScreenB' };
+class ScreenA extends React.Component {
+    static navigationOptions = {title: "Screen A"}
     constructor(props) {
-        super(props);
+        super(props)
     }
     render() {
         return (
-            <ScrollView>
-                <Text h3>Screen B</Text>
+            <View>
+                <Text h1>Screen A</Text>
                 <Button title="Go Home"
                         onPress={() =>this.props
                             .navigation
                             .goBack()} />
-            </ScrollView>
-        );
+            </View>
+        )
     }
 }
 
+const ScreenB = () => (
+    <View>
+        <Text h1>Screen B</Text>
+    </View>
+)
+
 const App = createStackNavigator({
     Home,
+    CourseList,
+    ModuleList,
+    LessonList,
+    WidgetList,
+    QuestionList,
+    TopicList,
+    TrueFalseQuestionEditor,
+    EssayQuestion,
     ScreenA,
     ScreenB,
     ScreenX
-}, { initialRouteName: 'Home' });
+});
 
-
-export default App
+export default App;
