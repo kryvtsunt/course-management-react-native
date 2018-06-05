@@ -8,7 +8,7 @@ import QuestionTypeChooser from './elements/QuestionTypeChooser'
 import QuestionTypePicker from './elements/QuestionTypePicker'
 import TrueFalseQuestionEditor from './elements/TrueFalseQuestionEditor'
 import TopicList from './components/TopicList'
-import EssayQuestion from './elements/EssayQuestion'
+import MultipleChoiceQuestionEditor from './elements/MultipleChoiceQuestionEditor'
 import { createStackNavigator } from 'react-navigation'
 import {Button} from 'react-native-elements'
 import ScreenX from './elements/ScreenX'
@@ -16,7 +16,7 @@ import CourseList from './components/CourseList'
 import ModuleList from './components/ModuleList'
 import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
-import QuestionList from './components/QuestionList'
+import QuestionList from './components/ExamEditor'
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -46,7 +46,7 @@ class Home extends React.Component {
 
 
                 <TrueFalseQuestionEditor/>
-
+                <MultipleChoiceQuestionEditor/>
                 <QuestionTypeChooser/>
                 <QuestionTypePicker/>
 
@@ -91,10 +91,11 @@ const App = createStackNavigator({
     ModuleList,
     LessonList,
     WidgetList,
-    QuestionList,
+    ExamEditor,
+    AssignmentEditor,
     TopicList,
     TrueFalseQuestionEditor,
-    EssayQuestion,
+    MultipleChoiceQuestionEditor,
     ScreenA,
     ScreenB,
     ScreenX

@@ -1,42 +1,46 @@
 import React from 'react'
 import {View} from 'react-native'
-import {FormInput, FormLabel, FormValidationMessage, Text, Button, CheckBox} from 'react-native-elements'
+import {Text, Button, CheckBox} from 'react-native-elements'
+import {FormLabel, FormInput, FormValidationMessage}
+    from 'react-native-elements'
 
-export default class EssayQuestion extends React.Component {
-    static navigationOptions =
-        {title: 'Essay Question'};
-
+class MultipleChoiceQuestionEditor extends React.Component {
+    static navigationOptions = { title: "Multiple Choice"}
     constructor(props) {
         super(props)
-        this.state = {title: '', description: '', points: 0, isTrue: true}
-        this.formUpdate = this.formUpdate.bind(this)
+        this.state = {
+            title: '',
+            description: '',
+            points: 0,
+            options: ''
+        }
     }
-
-    formUpdate(update) {
-        this.setState(update)
+    updateForm(newState) {
+        this.setState(newState)
     }
-
     render() {
-        return (
+        return(
             <View>
                 <FormLabel>Title</FormLabel>
                 <FormInput onChangeText={
-                    text => this.formUpdate({title: text})}/>
+                    text => this.updateForm({title: text})
+                }/>
                 <FormValidationMessage>
                     Title is required
                 </FormValidationMessage>
 
                 <FormLabel>Description</FormLabel>
                 <FormInput onChangeText={
-                    text => this.formUpdate({description: text})}/>
+                    text => this.updateForm({description: text})
+                }/>
                 <FormValidationMessage>
                     Description is required
                 </FormValidationMessage>
 
-                <CheckBox title='The answer is true'
-                          onPress={() => this.formUpdate
-                          ({isTrue: !this.state.isTrue})}
-                          checked={this.state.isTrue}/>
+                <FormLabel>Choices</FormLabel>
+                <FormInput onChangeText={
+                    text => this.updateForm({options: text})
+                }/>
 
                 <Button	backgroundColor="green"
                            color="white"
@@ -46,9 +50,12 @@ export default class EssayQuestion extends React.Component {
                            title="Cancel"/>
 
                 <Text h3>Preview</Text>
-                <Text h4>{this.state.title}</Text>
+                <Text h2>{this.state.title}</Text>
                 <Text>{this.state.description}</Text>
+
             </View>
         )
     }
 }
+
+export default MultipleChoiceQuestionEditor

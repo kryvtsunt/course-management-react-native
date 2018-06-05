@@ -1,7 +1,12 @@
-const Lesson_API_URL =
-    'https://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson';
+import 'es6-symbol/implement';
+
 // const Lesson_API_URL =
-//     'http://localhost:8080/api/course/CID/module/MID/lesson';
+//     'https://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson';
+
+
+
+const Lesson_API_URL =
+    'http://10.110.209.150:8080/api/course/CID/module/MID/lesson';
 
 let _singleton = Symbol();
 
@@ -23,34 +28,5 @@ export default class LessonService {
             .then(function (response) {
                 return response.json();
             })
-    }
-
-    // findAllLessons() {
-    //     return fetch('http://localhost:8080/api/lesson')
-    //         .then(function (response) {
-    //             return response.json();
-    //         })
-    // }
-
-
-    createLesson(courseId, moduleId, lesson) {
-        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId),
-            {
-                body: JSON.stringify(lesson),
-                headers: {'Content-Type': 'application/json'},
-                method: 'POST'
-            })
-            .then(function (response) {
-                return response.json();
-            })
-    }
-
-    deleteLesson(courseId, moduleId, lessonId) {
-        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId)+ '/' + lessonId,
-            {
-                method: 'DELETE'
-            }).then(function (response) {
-            return response;
-        })
     }
 }
