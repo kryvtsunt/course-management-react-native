@@ -1,11 +1,11 @@
 import 'es6-symbol/implement';
 
 const WIDGET_URL =
-    'http://10.110.209.150:8080/api/topic/TID/widget';
+    'http://10.0.0.164:8080/api/topic/TID/widget';
 const EXAM_URL =
-    'http://10.110.209.150:8080/api/topic/TID/exam';
+    'http://10.0.0.164:8080/api/topic/TID/exam';
 const ASSIGNMENT_URL =
-    'http://10.110.209.150:8080/api/topic/TID/assignment';
+    'http://10.0.0.164:8080/api/topic/TID/assignment';
 // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 
@@ -28,6 +28,16 @@ export default class WidgetService {
             .then(response => (response.json()))
     }
 
+    findAllExamsForTopic(topicId) {
+        return fetch(EXAM_URL.replace('TID', topicId))
+            .then(response => (response.json()))
+    }
+
+    findAllAssignmentsForTopic(topicId) {
+        return fetch(ASSIGNMENT_URL.replace('TID', topicId))
+            .then(response => (response.json()))
+    }
+
     createExam(topicId, exam) {
         return fetch(EXAM_URL.replace('TID', topicId),
             {
@@ -47,5 +57,22 @@ export default class WidgetService {
             })
             .then(response => (response.json()))
     }
+
+    deleteExam(examId) {
+        return fetch('http://10.0.0.164:8080/api/exam/EID/'.replace('EID', examId),
+            {
+                method: 'DELETE'
+            })
+            .then(response => (response.json()))
+    }
+
+    deleteAssignment(assignmentId) {
+        return fetch('http://10.0.0.164:8080/api/assignment/AID/'.replace('AID', assignmentId),
+            {
+                method: 'DELETE'
+            })
+            .then(response => (response.json()))
+    }
+
 
 }

@@ -6,7 +6,7 @@ import 'es6-symbol/implement';
 
 
 const MODULE_API_URL =
-    'http://10.110.209.150:8080/api/course/CID/module';
+    'http://10.0.0.164:8080/api/course/CID/module';
 
 let _singleton = Symbol();
 

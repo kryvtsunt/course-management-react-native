@@ -5,7 +5,7 @@ import 'es6-symbol/implement';
 
 
 const Topic_API_URL =
-    'http://10.110.209.150:8080/api/course/CID/module/MID/lesson/LID/topic';
+    'http://10.0.0.164:8080/api/course/CID/module/MID/lesson/LID/topic';
 
 let _singleton = Symbol();
 

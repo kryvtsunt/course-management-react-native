@@ -16,7 +16,8 @@ import CourseList from './components/CourseList'
 import ModuleList from './components/ModuleList'
 import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
-import QuestionList from './components/ExamEditor'
+import ExamEditor from './components/ExamEditor'
+import AssignmentEditor from './components/ExamEditor'
 
 class Home extends React.Component {
     static navigationOptions = {
