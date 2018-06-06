@@ -13,8 +13,10 @@ class ExamEditor extends Component {
             questions: [],
             examId: 1,
             questionType: 'MC',
-            newQuestionTitle: ''
+            newQuestionTitle: '',
+            newQuestionSubTitle: ''
         }
+
         this.findAllQuestionsForWidget = this.findAllQuestionsForWidget.bind(this);
         this.renderQuestions = this.renderQuestions.bind(this);
         this.createQuestion = this.createQuestion.bind(this);
@@ -22,7 +24,12 @@ class ExamEditor extends Component {
         this.createTF = this.createTF.bind(this);
         this.createES = this.createES.bind(this);
         this.createFB = this.createFB.bind(this);
+        this.deleteMC = this.deleteMC.bind(this);
+        this.deleteTF = this.deleteTF.bind(this);
+        this.deleteES = this.deleteES.bind(this);
+        this.deleteFB = this.deleteFB.bind(this);
         this.navigator = this.navigator.bind(this);
+        this.getIcon = this.getIcon.bind(this);
     }
 
     componentDidMount() {
@@ -53,10 +60,11 @@ class ExamEditor extends Component {
                         this.navigator(question)
                     }}
                     key={index}
-                    subtitle={question.description}
+                    subtitle={question.subtitle}
                     title={question.title}
-                    leftIcon={{name: "close", color: "red"}}
-                    leftIconOnPress={() => this.deleteQuestion(question)}
+                    leftIcon={this.getIcon(question)}
+                    rightIcon={{name: "close", color: "red"}}
+                    onPressRightIcon={() => this.deleteQuestion(question)}
                 />))
     }
 
@@ -65,21 +73,40 @@ class ExamEditor extends Component {
             this.props.navigation.navigate("TrueFalseQuestionEditor", {questionId: question.id})
         else if (question.type === "MC")
             this.props.navigation.navigate("MultipleChoiceQuestionEditor", {questionId: question.id})
-        else if (question.type === "Es")
+        else if (question.type === "ES")
             this.props.navigation.navigate("EssayQuestionEditor", {questionId: question.id})
         else if (question.type === "FB")
             this.props.navigation.navigate("FillBlanksQuestionEditor", {questionId: question.id})
     }
 
+    getIcon(question) {
+        if (question.type === "TF")
+            return {name: "check", color: "black"}
+        else if (question.type === "MC")
+            return {name: "list", color: "black"}
+        else if (question.type === "ES")
+            return {name: "subject", color: "black"}
+        else if (question.type === "FB")
+            return {name: "code", color: "black"}
+    }
+
+
     createQuestion() {
+        let addQuestion = {title: 'New Question', subtitle: 'New Subtitle'};
+        if (this.state.newQuestionTitle !== '') {
+            addQuestion.title = this.state.newQuestionTitle;
+        }
+        if (this.state.newQuestionSubTitle !== '') {
+            addQuestion.subtitle = this.state.newQuestionTitle;
+        }
         if (this.state.questionType === "MC") {
-            this.createMC();
+            this.createMC(addQuestion);
         } else if (this.state.questionType === "TF") {
-            this.createTF();
+            this.createTF(addQuestion);
         } else if (this.state.questionType === "ES") {
-            this.createES();
+            this.createES(addQuestion);
         } else if (this.state.questionType === "FB") {
-            this.createFB();
+            this.createFB(addQuestion);
         }
     }
 
@@ -119,44 +146,28 @@ class ExamEditor extends Component {
         })
     }
 
-    createMC() {
-        let addQuestion = {title: 'New MC Question'};
-        if (this.state.newQuestionTitle !== '') {
-            addQuestion.title = this.state.newQuestionTitle;
-        }
+    createMC(addQuestion) {
         this.questionService.createMC(this.state.examId, addQuestion)
             .then(() => {
                 this.findAllQuestionsForWidget(this.state.examId);
             });
     }
 
-    createTF() {
-        let addQuestion = {title: 'New TF Question'};
-        if (this.state.newQuestionTitle !== '') {
-            addQuestion.title = this.state.newQuestionTitle;
-        }
+    createTF(addQuestion) {
         this.questionService.createTF(this.state.examId, addQuestion)
             .then(() => {
                 this.findAllQuestionsForWidget(this.state.examId);
             });
     }
 
-    createES() {
-        let addQuestion = {title: 'New ES Question'};
-        if (this.state.newQuestionTitle !== '') {
-            addQuestion.title = this.state.newQuestionTitle;
-        }
+    createES(addQuestion) {
         this.questionService.createES(this.state.examId, addQuestion)
             .then(() => {
                 this.findAllQuestionsForWidget(this.state.examId);
             });
     }
 
-    createFB() {
-        let addQuestion = {title: 'New FB Question'};
-        if (this.state.newQuestionTitle !== '') {
-            addQuestion.title = this.state.newQuestionTitle;
-        }
+    createFB(addQuestion) {
         this.questionService.createFB(this.state.examId, addQuestion)
             .then(() => {
                 this.findAllQuestionsForWidget(this.state.examId);
@@ -168,9 +179,14 @@ class ExamEditor extends Component {
             <View style={{padding: 15}}>
                 {this.renderQuestions()}
 
-                <FormLabel>QuestionName</FormLabel>
+                <FormLabel>Question Title</FormLabel>
                 <FormInput onChangeText={
                     text => this.setState({newQuestionTitle: text})
+                }/>
+
+                <FormLabel>Question Subtitle</FormLabel>
+                <FormInput onChangeText={
+                    text => this.setState({newQuestionSubTitle: text})
                 }/>
                 <Picker
                     selectedValue={this.state.questionType}

@@ -24,6 +24,11 @@ export default class QuestionService {
             .then(response => (response.json()))
     }
 
+    findQuestionMC(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionMC/QID').replace('QID', questionId))
+            .then(response => (response.json()))
+    }
+
     createMC(examId, question) {
         return fetch(('http://10.0.0.164:8080/api/exam/EID/questionMC').replace('EID', examId),
             {
@@ -64,28 +69,38 @@ export default class QuestionService {
     }
 
     deleteMC(questionId) {
-        return fetch(('http://10.0.0.164:8080/api/questionMS/QID/').replace('QID', questionId),
+        return fetch(('http://10.0.0.164:8080/api/questionMC/QID').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
 
     deleteTF(questionId) {
-        return fetch(('http://10.0.0.164:8080/api/questionTF/QID/').replace('QID', questionId),
+        return fetch(('http://10.0.0.164:8080/api/questionTF/QID').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
     deleteFB(questionId) {
-        return fetch(('http://10.0.0.164:8080/api/questionFB/QID/').replace('QID', questionId),
+        return fetch(('http://10.0.0.164:8080/api/questionFB/QID').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
+
     deleteES(questionId) {
-        return fetch(('http://10.0.0.164:8080/api/questionES/QID/').replace('QID', questionId),
+        return fetch(('http://10.0.0.164:8080/api/questionES/QID').replace('QID', questionId),
             {
                 method: 'DELETE'
+            })
+    }
+
+    updateMC(questionId, question) {
+        return fetch(('http://10.0.0.164:8080/api/questionMC/QID').replace('QID', questionId),
+            {
+                body: JSON.stringify(question),
+                headers: {'Content-Type': 'application/json'},
+                method: 'PUT'
             })
     }
 
