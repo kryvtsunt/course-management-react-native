@@ -72,7 +72,7 @@ class WidgetList extends Component {
         return this.state.widgets.map(
             (widget, index) => (
                 <ListItem
-                    onPress={this.navigator}
+                    onPress={() => this.navigator(widget)}
                     key={index}
                     title={widget.name}
                     leftIcon={{name: "close", color:"red"}}
@@ -103,20 +103,20 @@ class WidgetList extends Component {
                 />))
     }
 
-    navigator() {
+    navigator(widget) {
         if (widget.widgetType === "Exam") {
-            this.navigateExam();
+            this.navigateExam(widget);
         } else if (widget.widgetType === "Assignment") {
-            this.navigateAssignment();
+            this.navigateAssignment(widget);
         }
 
     }
 
-    navigateExam() {
+    navigateExam(widget) {
         this.props.navigation.navigate("ExamEditor", {examId: widget.id})
     }
 
-    navigateAssignment() {
+    navigateAssignment(widget) {
         this.props.navigation.navigate("AssignmentEditor", {assignmentId: widget.id})
     }
 

@@ -44,4 +44,49 @@ export default class QuestionService {
             .then(response => (response.json()))
     }
 
+    createFB(examId, question) {
+        return fetch(('http://10.0.0.164:8080/api/exam/EID/questionFB').replace('EID', examId),
+            {
+                body: JSON.stringify(question),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            })
+            .then(response => (response.json()))
+    }
+    createES(examId, question) {
+        return fetch(('http://10.0.0.164:8080/api/exam/EID/questionES').replace('EID', examId),
+            {
+                body: JSON.stringify(question),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            })
+            .then(response => (response.json()))
+    }
+
+    deleteMC(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionMS/QID/').replace('QID', questionId),
+            {
+                method: 'DELETE'
+            })
+    }
+
+    deleteTF(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionTF/QID/').replace('QID', questionId),
+            {
+                method: 'DELETE'
+            })
+    }
+    deleteFB(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionFB/QID/').replace('QID', questionId),
+            {
+                method: 'DELETE'
+            })
+    }
+    deleteES(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionES/QID/').replace('QID', questionId),
+            {
+                method: 'DELETE'
+            })
+    }
+
 }
