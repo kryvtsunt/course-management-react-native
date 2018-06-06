@@ -29,7 +29,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
         this.findQuestion = this.findQuestion.bind(this)
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {navigation} = this.props;
         const questionId = navigation.getParam("questionId")
         this.findQuestion(questionId);
@@ -135,23 +135,31 @@ class MultipleChoiceQuestionEditor extends React.Component {
                     }}
                 />
                 <FormLabel>Title</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.title}
+                    onChangeText={
                     text => this.updateForm({title: text})
                 }/>
 
                 <FormLabel>Subtitle</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.subtitle}
+                    onChangeText={
                     text => this.updateForm({subtitle: text})
                 }/>
 
                 <FormLabel>Description</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.description}
+                    onChangeText={
                     text => this.updateForm({description: text})
                 }/>
 
 
                 <FormLabel>Number of points</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.points}
+                    onChangeText={
                     points => this.updateForm({points: points})
                 }/>
 
@@ -184,7 +192,9 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 <Button backgroundColor="red"
                         color="white"
                         title="Cancel"
-                        onPress={this.createQuestion}/>
+                        onPress={() =>this.props
+                            .navigation
+                            .goBack()}/>
 
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
