@@ -85,7 +85,7 @@ class WidgetList extends Component {
                 <ListItem
                     onPress={() => this.props.navigation.navigate("ExamEditor", {examId: exam.id})}
                     key={index}
-                    title={exam.name}
+                    title={exam.title}
                     leftIcon={{name: "av-timer", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
                     onPressRightIcon ={() => this.deleteExam(exam.id)}
@@ -98,7 +98,7 @@ class WidgetList extends Component {
                 <ListItem
                     onPress={() => this.props.navigation.navigate("AssignmentEditor", {assignmentId: assignment.id})}
                     key={index}
-                    title={assignment.name}
+                    title={assignment.title}
                     leftIcon={{name: "book", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
                     onPressRightIcon ={() => this.deleteAssignment(assignment.id)}
@@ -133,9 +133,9 @@ class WidgetList extends Component {
     }
 
     createExam() {
-        let addWidget = {name: 'New Exam'};
+        let addWidget = {title: 'New Exam'};
         if (this.state.newWidgetName !== '') {
-            addWidget.name = this.state.newWidgetName;
+            addWidget.title = this.state.newWidgetName;
         }
         this.widgetService.createExam(this.state.topicId, addWidget)
             .then(() => {
@@ -144,9 +144,9 @@ class WidgetList extends Component {
     }
 
     createAssignment() {
-        let addWidget = {name: 'New Assignment'};
+        let addWidget = {title: 'New Assignment'};
         if (this.state.newWidgetName !== '') {
-            addWidget.name = this.state.newWidgetName;
+            addWidget.title = this.state.newWidgetName;
         }
         this.widgetService.createAssignment(this.state.topicId, addWidget)
             .then(() => {
@@ -174,7 +174,8 @@ class WidgetList extends Component {
                 {/*{this.renderWidgets()}*/}
                 {this.renderExams()}
                 {this.renderAssignments()}
-                <FormLabel>ExamName</FormLabel>
+
+                <FormLabel>Widget Title</FormLabel>
                 <FormInput onChangeText={
                     text => this.setState({newWidgetName: text})
                 }/>

@@ -6,7 +6,7 @@ import WidgetService from "../services/WidgetService";
 
 
 class AssignmentEditor extends React.Component {
-    static navigationOptions = {title: "Assignment"}
+    static navigationOptions = {title: "AssignmentEditor"}
 
     constructor(props) {
         super(props)
@@ -25,14 +25,14 @@ class AssignmentEditor extends React.Component {
     componentWillMount() {
         const {navigation} = this.props;
         const assignmentId = navigation.getParam("assignmentId")
-        this.findAssignment(questionId);
+        this.findAssignment(assignmentId);
 
     }
 
     componentWillReceiveProps() {
         const {navigation} = this.props;
         const assignmentId = navigation.getParam("assignmentId")
-        this.findAssignment(questionId);
+        this.findAssignment(assignmentId);
     }
 
     updateForm(newState) {
@@ -61,20 +61,29 @@ class AssignmentEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4>Preview</Text>
+                <Text h4   style={{padding: 10}}>Preview</Text>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: 2,
+                    }}
+                />
+                <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <Text h3>{this.state.title} | {this.state.points}</Text>
                     <Text h4>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
 
                     <TextInput
-                        style={{height: 60}}
-                        placeholder="Type your answer to the assignment question"
+                        style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
+                        onChangeText={(text) => this.setState({text})}
+                        value={this.state.description}
+                        placeholder="Type your answer"
                     />
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4>Edit</Text>
+                <Text h4 style={{padding: 10}}>Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -107,7 +116,7 @@ class AssignmentEditor extends React.Component {
                 <Button backgroundColor="green"
                         color="white"
                         title="Save"
-                        onPress={this.updateQuestion}/>
+                        onPress={this.updateAssignment}/>
                 <Button backgroundColor="red"
                         color="white"
                         title="Cancel"

@@ -100,8 +100,16 @@ class MultipleChoiceQuestionEditor extends React.Component {
 
         return (
             <ScrollView>
+                <Text h4 style={{padding: 10}} >Preview</Text>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: 2,
+                    }}
+                />
+                <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3>{this.state.title}   | {this.state.points}</Text>
+                    <Text h3>{this.state.title}  | {this.state.points}</Text>
                     <Text h4>{this.state.subtitle}</Text>
                     <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
@@ -127,7 +135,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4>Edit</Text>
+                <Text h4 style={{padding: 10}} >Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',

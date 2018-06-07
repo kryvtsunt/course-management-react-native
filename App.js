@@ -20,7 +20,7 @@ import ModuleList from './components/ModuleList'
 import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
 import ExamEditor from './components/ExamEditor'
-import AssignmentEditor from './components/ExamEditor'
+import AssignmentEditor from './components/AssignmentEditor'
 
 class Home extends React.Component {
     static navigationOptions = {

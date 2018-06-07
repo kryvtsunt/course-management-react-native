@@ -17,7 +17,8 @@ class FillBlanksQuestionEditor extends React.Component {
             title: '',
             subtitle: '',
             description: '',
-            points: 0
+            points: 0,
+            text: ''
         }
 
         this.updateForm = this.updateForm.bind(this)
@@ -68,21 +69,23 @@ class FillBlanksQuestionEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4>Preview</Text>
+                <Text h4 style={{padding: 10}} >Preview</Text>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: 2,
+                    }}
+                />
+                <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <Text h3>{this.state.title} | {this.state.points}</Text>
                     <Text h4>{this.state.subtitle}</Text>
                     <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
-
-                    <TextInput
-                        style={{height: 60}}
-                        placeholder="Type your answer to the essay question"
-                    />
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4>Edit</Text>
+                <Text h4 style={{padding: 10}} >Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -116,6 +119,13 @@ class FillBlanksQuestionEditor extends React.Component {
                     onChangeText={
                         points => this.updateForm({points: points})
                     }/>
+
+                <TextInput
+                    style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(text) => this.setState({text: text})}
+                    value={this.state.description}
+                    placeholder="Type your answer"
+                />
 
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
