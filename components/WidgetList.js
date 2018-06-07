@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Alert, Picker} from 'react-native'
+import {View, Alert, Picker, ScrollView} from 'react-native'
 import {Text, ListItem, Button, FormLabel, FormInput} from 'react-native-elements'
 import WidgetService from "../services/WidgetService";
 
@@ -86,7 +86,7 @@ class WidgetList extends Component {
                     onPress={() => this.props.navigation.navigate("ExamEditor", {examId: exam.id})}
                     key={index}
                     title={exam.title}
-                    leftIcon={{name: "av-timer", color: "black"}}
+                    leftIcon={{name: "border-color", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
                     onPressRightIcon ={() => this.deleteExam(exam.id)}
                 />))
@@ -99,7 +99,7 @@ class WidgetList extends Component {
                     onPress={() => this.props.navigation.navigate("AssignmentEditor", {assignmentId: assignment.id})}
                     key={index}
                     title={assignment.title}
-                    leftIcon={{name: "book", color: "black"}}
+                    leftIcon={{name: "attachment", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
                     onPressRightIcon ={() => this.deleteAssignment(assignment.id)}
                 />))
@@ -170,7 +170,7 @@ class WidgetList extends Component {
 
     render() {
         return (
-            <View style={{padding: 15}}>
+            <ScrollView style={{padding: 15}}>
                 {/*{this.renderWidgets()}*/}
                 {this.renderExams()}
                 {this.renderAssignments()}
@@ -186,12 +186,26 @@ class WidgetList extends Component {
                     <Picker.Item value="Exam" label="Exam"/>
                     <Picker.Item value="Assignment" label="Assignment"/>
                 </Picker>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                 <Button
+                    buttonStyle={{
+                        backgroundColor: "green",
+                        width: 250,
+                        height: 45,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        padding: 5,
+                        margin: 5,
+                    }}
                     onPress={this.createWidget}
-                    backgroundColor="green"
                     color="white"
                     title="Add"/>
-            </View>
+                </View>
+            </ScrollView>
         )
     }
 }

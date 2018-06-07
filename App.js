@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native';
+import {StyleSheet, Text, View, StatusBar, ScrollView} from 'react-native';
 import FixedHeader from './elements/FixedHeader'
 import TextHeadings from './elements/TextHeadings'
 import Icons from './elements/Icons'
@@ -12,7 +12,7 @@ import TrueFalseQuestionEditor from './elements/TrueFalseQuestionEditor'
 import MultipleChoiceQuestionEditor from './elements/MultipleChoiceQuestionEditor'
 import FillBlanksQuestionEditor from './elements/FillBlanksQuestionEditor'
 import EssayQuestionEditor from './elements/EssayQuestionEditor'
-import { createStackNavigator } from 'react-navigation'
+import {createStackNavigator} from 'react-navigation'
 import {Button} from 'react-native-elements'
 import ScreenX from './elements/ScreenX'
 import CourseList from './components/CourseList'
@@ -26,18 +26,31 @@ class Home extends React.Component {
     static navigationOptions = {
         title: 'Home'
     }
+
     constructor(props) {
         super(props)
     }
+
     render() {
-        return(
-            <View>
-                <StatusBar barStyle="light-content"/>
+        return (
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
                 <Button
-                    backgroundColor="blue"
-                        title="Courses"
-                        onPress={() => this.props.navigation
-                            .navigate('CourseList') } />
+                    buttonStyle={{
+                        backgroundColor: "rgba(92, 99,216, 1)",
+                        width: 250,
+                        height: 45,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        padding: 5,
+                        margin: 20,
+                    }}
+                    title="Courses"
+                    onPress={() => this.props.navigation
+                        .navigate('CourseList')}/>
             </View>
         )
     }
@@ -45,17 +58,19 @@ class Home extends React.Component {
 
 class ScreenA extends React.Component {
     static navigationOptions = {title: "Screen A"}
+
     constructor(props) {
         super(props)
     }
+
     render() {
         return (
             <View>
                 <Text h1>Screen A</Text>
                 <Button title="Go Home"
-                        onPress={() =>this.props
+                        onPress={() => this.props
                             .navigation
-                            .goBack()} />
+                            .goBack()}/>
             </View>
         )
     }
@@ -68,21 +83,32 @@ const ScreenB = () => (
 )
 
 const App = createStackNavigator({
-    Home,
-    CourseList,
-    ModuleList,
-    LessonList,
-    WidgetList,
-    ExamEditor,
-    AssignmentEditor,
-    TopicList,
-    TrueFalseQuestionEditor,
-    MultipleChoiceQuestionEditor,
-    EssayQuestionEditor,
-    FillBlanksQuestionEditor,
-    ScreenA,
-    ScreenB,
-    ScreenX
-});
+        Home,
+        CourseList,
+        ModuleList,
+        LessonList,
+        WidgetList,
+        ExamEditor,
+        AssignmentEditor,
+        TopicList,
+        TrueFalseQuestionEditor,
+        MultipleChoiceQuestionEditor,
+        EssayQuestionEditor,
+        FillBlanksQuestionEditor,
+        ScreenA,
+        ScreenB,
+        ScreenX
+    },
+    {
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5f6e87',
+            },
+            headerTintColor: 'white'
+
+
+        }
+    }
+)
 
 export default App;

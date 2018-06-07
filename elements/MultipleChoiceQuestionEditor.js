@@ -54,7 +54,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 this.updateForm({subtitle: question.subtitle})
                 this.updateForm({description: question.description})
                 this.updateForm({points: question.points})
-                if (question.options !== undefined) {
+                if ((question.options !== undefined)&&(question.options !== null)) {
                     // console.log("tut" + question.options)
                     this.updateForm({
                         options: question.options.split(',').map((item, index) => ({
@@ -101,20 +101,16 @@ class MultipleChoiceQuestionEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4 style={{padding: 10}} >Preview</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Preview</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
                         borderBottomWidth: 2,
                     }}
                 />
-                <Text>{'\n'}</Text>
-                <View style={{flex: 1, paddingLeft: 10}}>
-                </View>
-                <View style={{flex: 1, paddingRight: 10}}>
-                </View>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3>{this.state.title}  | {this.state.points}</Text>
+                    <Text>{'\n'}</Text>
+                    <Text h3>{this.state.title} | {this.state.points}</Text>
                     <Text h4>{this.state.subtitle}</Text>
                     <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
@@ -137,10 +133,11 @@ class MultipleChoiceQuestionEditor extends React.Component {
                         type='font-awesome'
                         onPress={() => this.updateForm({options: this.state.options.slice(0, -1)})}
                     />
+                    <Text>{'\n'}</Text>
                 </View>
 
-                <Text>{'\n'}</Text>
-                <Text h4 style={{padding: 10}} >Edit</Text>
+
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -151,29 +148,29 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 <FormInput
                     defaultValue={this.state.title}
                     onChangeText={
-                    text => this.updateForm({title: text})
-                }/>
+                        text => this.updateForm({title: text})
+                    }/>
 
                 <FormLabel>Subtitle</FormLabel>
                 <FormInput
                     defaultValue={this.state.subtitle}
                     onChangeText={
-                    text => this.updateForm({subtitle: text})
-                }/>
+                        text => this.updateForm({subtitle: text})
+                    }/>
 
                 <FormLabel>Description</FormLabel>
                 <FormInput
                     defaultValue={this.state.description}
                     onChangeText={
-                    text => this.updateForm({description: text})
-                }/>
+                        text => this.updateForm({description: text})
+                    }/>
 
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
                     onChangeText={
-                    points => this.updateForm({points: points})
-                }/>
+                        points => this.updateForm({points: points})
+                    }/>
 
 
                 <FormLabel>Add new choice</FormLabel>
@@ -182,7 +179,22 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 }/>
 
 
-                <Button backgroundColor="blue"
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "rgba(92, 99,216, 1)",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                            marginBottom: 30
+                        }}
                         color="white"
                         title="Add Choice"
                         onPress={() => {
@@ -194,20 +206,44 @@ class MultipleChoiceQuestionEditor extends React.Component {
                             return this.updateForm({options: newprops})
                         }
                         }
-                />
-                <Text>{'\n'}</Text>
-                <Text>{'\n'}</Text>
-                <Button backgroundColor="green"
+                    />
+
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Save"
                         onPress={this.updateQuestion}/>
-                <Button backgroundColor="red"
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "red",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Cancel"
-                        onPress={() =>this.props
+                        onPress={() => this.props
                             .navigation
                             .goBack()}/>
-
+                </View>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
             </ScrollView>

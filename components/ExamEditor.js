@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Alert, Picker} from 'react-native'
+import {View, Alert, Picker, ScrollView} from 'react-native'
 import {Text, ListItem, Button, FormLabel, FormInput} from 'react-native-elements'
 import QuestionService from "../services/QuestionService";
 
@@ -176,7 +176,7 @@ class ExamEditor extends Component {
 
     render() {
         return (
-            <View style={{padding: 15}}>
+            <ScrollView style={{padding: 15}}>
                 {this.renderQuestions()}
 
                 <FormLabel>Question Title</FormLabel>
@@ -197,12 +197,26 @@ class ExamEditor extends Component {
                     <Picker.Item value="TF" label="True or false"/>
                     <Picker.Item value="FB" label="Fill in the blanks"/>
                 </Picker>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                 <Button
+                    buttonStyle={{
+                        backgroundColor: "green",
+                        width: 250,
+                        height: 45,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        padding: 5,
+                        margin: 5,
+                    }}
                     onPress={this.createQuestion}
-                    backgroundColor="green"
                     color="white"
                     title="Add"/>
-            </View>
+                </View>
+            </ScrollView>
         )
     }
 }

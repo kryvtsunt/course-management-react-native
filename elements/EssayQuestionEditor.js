@@ -69,7 +69,7 @@ class EssayQuestionEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4 style={{padding: 10}} >Preview</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Preview</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -83,7 +83,16 @@ class EssayQuestionEditor extends React.Component {
                     <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
                     <TextInput
-                        style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
+                        editable={false}
+                        selectTextOnFocus={false}
+                        style={{
+                            padding: 15,
+                            height: 150,
+                            width: 250,
+                            backgroundColor: 'white',
+                            borderColor: 'gray',
+                            borderWidth: 2
+                        }}
                         onChangeText={(text) => this.setState({text})}
                         value={this.state.description}
                         placeholder="Type your answer"
@@ -91,7 +100,7 @@ class EssayQuestionEditor extends React.Component {
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4 style={{padding: 10}} >Edit</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -127,18 +136,46 @@ class EssayQuestionEditor extends React.Component {
                     }/>
 
                 <Text>{'\n'}</Text>
-                <Text>{'\n'}</Text>
-                <Button backgroundColor="green"
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Save"
                         onPress={this.updateQuestion}/>
-                <Button backgroundColor="red"
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "red",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Cancel"
-                        onPress={() =>this.props
+                        onPress={() => this.props
                             .navigation
                             .goBack()}/>
-
+                </View>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
             </ScrollView>

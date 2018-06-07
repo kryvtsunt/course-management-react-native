@@ -2,7 +2,7 @@ import 'es6-symbol/implement';
 
 // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
-const HOST = 'http://10.0.0.164:8080';
+const HOST = 'http://10.110.209.150:8080';
 
 const QUESTION_URL =
     HOST+'/api/exam/EID/question';

@@ -18,12 +18,16 @@ class FillBlanksQuestionEditor extends React.Component {
             subtitle: '',
             description: '',
             points: '0',
-            blank: ''
+            blank: '',
+            output: '',
+            inputs: []
         }
 
         this.updateForm = this.updateForm.bind(this)
         this.updateQuestion = this.updateQuestion.bind(this)
         this.findQuestion = this.findQuestion.bind(this)
+        this.getBlank = this.getBlank.bind(this)
+        this.renderInputs = this.renderInputs.bind(this)
     }
 
     componentWillMount() {
@@ -55,6 +59,19 @@ class FillBlanksQuestionEditor extends React.Component {
             })
     }
 
+    getBlank() {
+        let output = this.state.blank.replace(/\[(.+?)\]/g, " [ ... ] ")
+        this.updateForm({output: output})
+        let rxp = /\[(.*?)\]/g
+        let str = this.state.blank
+        let curMatch;
+        let inputs = [];
+        while (curMatch = rxp.exec(str)) {
+            inputs.push(curMatch[1]);
+        }
+        this.updateForm({inputs: inputs})
+    }
+
     updateQuestion() {
         let question = {};
         question.id = this.state.id
@@ -63,8 +80,28 @@ class FillBlanksQuestionEditor extends React.Component {
         question.description = this.state.description
         question.points = this.state.points
         question.blank = this.state.blank
-        this.questionService.updateES(this.state.id, question)
+        this.questionService.updateFB(this.state.id, question)
         this.props.navigation.goBack();
+    }
+
+    renderInputs() {
+        return this.state.inputs.map(
+            (input, index) => (
+                <TextInput
+                    editable={false}
+                    selectTextOnFocus={false}
+                    key={index}
+                    style={{
+                        padding: 3,
+                        height: 30,
+                        width: 150,
+                        margin: 3,
+                        backgroundColor: 'white',
+                        borderColor: 'gray',
+                        borderWidth: 2,
+                    }}
+                    placeholder={' [ ' + input + ' ]'}
+                />))
     }
 
 
@@ -72,7 +109,7 @@ class FillBlanksQuestionEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4 style={{padding: 10}} >Preview</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Preview</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -84,17 +121,25 @@ class FillBlanksQuestionEditor extends React.Component {
                     <Text h3>{this.state.title} | {this.state.points}</Text>
                     <Text h4>{this.state.subtitle}</Text>
                     <Text h5>{this.state.description}</Text>
-                    <Text>{'\n'}</Text>
-                    <TextInput
-                        editable={false} selectTextOnFocus={false}
-                        style={{padding: 15, height: 150, width: 250, backgroundColor:'grey', borderColor: 'gray', borderWidth: 1}}
-                        value={this.state.blank}
-                        placeholder="Fill out the form"
+                    <Text
+                        style={{
+                            marginHorizontal: 80,
+                            marginVertical: 20
+                        }}
+                    >{this.state.output}</Text>
+                    {this.renderInputs()}
+                    <Icon
+                        raised
+                        color='#f50'
+                        size={15}
+                        name='code'
+                        type='font-awesome'
+                        onPress={() => this.getBlank()}
                     />
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4 style={{padding: 10}} >Edit</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -122,12 +167,6 @@ class FillBlanksQuestionEditor extends React.Component {
                         text => this.updateForm({description: text})
                     }/>
 
-                <FormLabel>Description</FormLabel>
-                <FormInput
-                    defaultValue={this.state.description}
-                    onChangeText={
-                        text => this.updateForm({description: text})
-                    }/>
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
@@ -137,26 +176,57 @@ class FillBlanksQuestionEditor extends React.Component {
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <TextInput
-                        style={{padding: 15, height: 100, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
+                        style={{
+                            padding: 15,
+                            height: 100,
+                            width: 250,
+                            backgroundColor: 'white',
+                            borderColor: 'gray',
+                            borderWidth: 1
+                        }}
                         value={this.state.blank}
                         placeholder="Blank editor"
-                        onChangeText={(blank) => this.setState({blank})}
-                        multiline = {true}
+                        onChangeText={(blank) => this.updateForm({blank: blank})}
+                        multiline={true}
                     />
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text>{'\n'}</Text>
-                <Button backgroundColor="green"
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Save"
                         onPress={this.updateQuestion}/>
-                <Button backgroundColor="red"
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "red",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Cancel"
-                        onPress={() =>this.props
+                        onPress={() => this.props
                             .navigation
                             .goBack()}/>
+                </View>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>

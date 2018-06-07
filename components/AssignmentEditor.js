@@ -44,7 +44,7 @@ class AssignmentEditor extends React.Component {
         this.widgetService.findAssignment(assignmentId)
             .then((assignment) => {
                 this.updateForm({id: assignment.id})
-                this.updateForm({title:  assignment.title})
+                this.updateForm({title: assignment.title})
                 this.updateForm({description: assignment.description})
                 this.updateForm({points: assignment.points})
             })
@@ -65,7 +65,7 @@ class AssignmentEditor extends React.Component {
 
         return (
             <ScrollView>
-                <Text h4   style={{padding: 10}}>Preview</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Preview</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -79,13 +79,20 @@ class AssignmentEditor extends React.Component {
                     <Text>{'\n'}</Text>
 
                     <TextInput editable={false} selectTextOnFocus={false}
-                        style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
-                        placeholder="Type your answer for the assignment"
+                               style={{
+                                   padding: 15,
+                                   height: 150,
+                                   width: 250,
+                                   backgroundColor: 'white',
+                                   borderColor: 'gray',
+                                   borderWidth: 2
+                               }}
+                               placeholder="Type your answer for the assignment"
                     />
                 </View>
 
                 <Text>{'\n'}</Text>
-                <Text h4 style={{padding: 10}}>Edit</Text>
+                <Text h4 style={{padding: 10, backgroundColor: 'white'}}>Edit</Text>
                 <View
                     style={{
                         borderBottomColor: 'black',
@@ -109,24 +116,51 @@ class AssignmentEditor extends React.Component {
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
-                    defaultValue={this.state.points}
                     onChangeText={
                         points => this.updateForm({points: points})
                     }/>
 
                 <Text>{'\n'}</Text>
-                <Text>{'\n'}</Text>
-                <Button backgroundColor="green"
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Save"
                         onPress={this.updateAssignment}/>
-                <Button backgroundColor="red"
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "red",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
                         color="white"
                         title="Cancel"
-                        onPress={() =>this.props
+                        onPress={() => this.props
                             .navigation
                             .goBack()}/>
-
+                </View>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
             </ScrollView>
