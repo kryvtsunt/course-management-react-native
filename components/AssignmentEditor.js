@@ -1,81 +1,125 @@
-import React, {Component} from 'react'
-import {View, Alert, Picker} from 'react-native'
-import {Text, ListItem, Button} from 'react-native-elements'
-import QuestionService from "../services/QuestionService";
+import React from 'react'
+import {View, ScrollView, TextInput} from 'react-native'
+import {Text, Button, CheckBox} from 'react-native-elements'
+import {FormLabel, FormInput, FormValidationMessage, ListItem, Icon} from 'react-native-elements'
+import WidgetService from "../services/WidgetService";
 
-class AssignmentEditor extends Component {
-    static navigationOptions = {title: 'AssignmentEditor'}
+
+class AssignmentEditor extends React.Component {
+    static navigationOptions = {title: "Assignment"}
+
     constructor(props) {
         super(props)
-        this.questionService = QuestionService.instance
+        this.widgetService = WidgetService.instance
         this.state = {
-            questions: [],
-            examId: 1,
-            questionType: 'MC'
+            id: '',
+            title: '',
+            description: '',
         }
-        this.findAllQuestionsForWidget = this.findAllQuestionsForWidget.bind(this);
-        this.renderQuestions = this.renderQuestions.bind(this);
+
+        this.updateForm = this.updateForm.bind(this)
+        this.updateAssignment = this.updateAssignment.bind(this)
+        this.findAssignment = this.updateAssignment.bind(this)
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {navigation} = this.props;
-        const examId = navigation.getParam("examId")
-        this.setState({examId: examId})
-        this.findAllQuestionsForWidget(examId);
+        const assignmentId = navigation.getParam("assignmentId")
+        this.findAssignment(questionId);
 
     }
 
     componentWillReceiveProps() {
         const {navigation} = this.props;
-        const examId = navigation.getParam("examId")
-        this.setState({examId: examId})
-        this.findAllQuestionsForWidget(examId);
+        const assignmentId = navigation.getParam("assignmentId")
+        this.findAssignment(questionId);
     }
 
-    findAllQuestionsForWidget(examId){
-        this.questionService.findAllQuestionsForWidget(examId)
-            .then(questions => this.setState({questions}))
+    updateForm(newState) {
+        this.setState(newState)
     }
 
-    renderQuestions(){
-        return this.state.questions.map(
-            (question, index) => (
-                <ListItem
-                    onPress={() => {
-                        if(question.type === "TrueFalse")
-                            this.props.navigation
-                                .navigate("TrueFalseQuestionEditor", {questionId: question.id})
-                        if(question.type === "MultipleChoice")
-                            this.props.navigation
-                                .navigate("MultipleChoiceQuestionEditor", {questionId: question.id})
-                    }}
-                    key={index}
-                    subtitle={question.description}
-                    title={question.title}/>))
+    findAssignment(assignmentId) {
+        this.widgetService.findAssignment(assignmentId)
+            .then((assignment) => {
+                this.updateForm({id: assignment.id})
+                this.updateForm({title:  assignment.title})
+                this.updateForm({description: assignment.description})
+            })
     }
+
+    updateAssignment() {
+        let assignment = {};
+        assignment.id = this.state.id
+        assignment.title = this.state.title
+        assignment.description = this.state.description
+        this.widgetService.updateAssignment(this.state.id, assignment)
+    }
+
 
     render() {
-        return(
-            <View style={{padding: 15}}>
-                <Text> Assignment </Text>
-                {this.renderQuestions()}
 
-                <Picker
-                    selectedValue={this.state.questionType}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({questionType: itemValue})}>
-                    <Picker.Item value="MC" label="Multiple choice"/>
-                    <Picker.Item value="ES" label="Essay"/>
-                    <Picker.Item value="TF" label="True or false"/>
-                    <Picker.Item value="FB" label="Fill in the blanks"/>
-                </Picker>
-                <Button
-                    onPress={this.createWidget}
-                    backgroundColor="green"
-                    color="white"
-                    title="Add"/>
-            </View>
+        return (
+            <ScrollView>
+                <Text h4>Preview</Text>
+                <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                    <Text h3>{this.state.title} | {this.state.points}</Text>
+                    <Text h4>{this.state.description}</Text>
+                    <Text>{'\n'}</Text>
+
+                    <TextInput
+                        style={{height: 60}}
+                        placeholder="Type your answer to the assignment question"
+                    />
+                </View>
+
+                <Text>{'\n'}</Text>
+                <Text h4>Edit</Text>
+                <View
+                    style={{
+                        borderBottomColor: 'black',
+                        borderBottomWidth: 2,
+                    }}
+                />
+                <FormLabel>Title</FormLabel>
+                <FormInput
+                    defaultValue={this.state.title}
+                    onChangeText={
+                        text => this.updateForm({title: text})
+                    }/>
+
+                <FormLabel>Description</FormLabel>
+                <FormInput
+                    defaultValue={this.state.description}
+                    onChangeText={
+                        text => this.updateForm({description: text})
+                    }/>
+
+
+                <FormLabel>Number of points</FormLabel>
+                <FormInput
+                    onChangeText={
+                        points => this.updateForm({points: points})
+                    }/>
+
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Button backgroundColor="green"
+                        color="white"
+                        title="Save"
+                        onPress={this.updateQuestion}/>
+                <Button backgroundColor="red"
+                        color="white"
+                        title="Cancel"
+                        onPress={() =>this.props
+                            .navigation
+                            .goBack()}/>
+
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+            </ScrollView>
         )
     }
 }
+
 export default AssignmentEditor

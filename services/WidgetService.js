@@ -74,5 +74,19 @@ export default class WidgetService {
             .then(response => (response.json()))
     }
 
+    updateAssignment(assignmentId, assignment) {
+        return fetch(('http://10.0.0.164:8080/api/assignment/AID').replace('AID', assignmentId),
+            {
+                body: JSON.stringify(assignment),
+                headers: {'Content-Type': 'application/json'},
+                method: 'PUT'
+            })
+    }
+
+    findAssignment(assignmentId) {
+        return fetch(('http://10.0.0.164:8080/api/assignment/AID').replace('AID', assignmentId))
+            .then(response => (response.json()))
+    }
+
 
 }

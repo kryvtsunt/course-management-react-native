@@ -1,7 +1,7 @@
 import 'es6-symbol/implement';
-
+const HOST = 'http://10.0.0.164:8080';
 const QUESTION_URL =
-    'http://10.0.0.164:8080/api/exam/EID/question';
+    HOST+'/api/exam/EID/question';
 // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 
@@ -26,6 +26,21 @@ export default class QuestionService {
 
     findQuestionMC(questionId) {
         return fetch(('http://10.0.0.164:8080/api/questionMC/QID').replace('QID', questionId))
+            .then(response => (response.json()))
+    }
+
+    findQuestionES(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionES/QID').replace('QID', questionId))
+            .then(response => (response.json()))
+    }
+
+    findQuestionFB(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionFB/QID').replace('QID', questionId))
+            .then(response => (response.json()))
+    }
+
+    findQuestionTF(questionId) {
+        return fetch(('http://10.0.0.164:8080/api/questionTF/QID').replace('QID', questionId))
             .then(response => (response.json()))
     }
 
@@ -97,6 +112,15 @@ export default class QuestionService {
 
     updateMC(questionId, question) {
         return fetch(('http://10.0.0.164:8080/api/questionMC/QID').replace('QID', questionId),
+            {
+                body: JSON.stringify(question),
+                headers: {'Content-Type': 'application/json'},
+                method: 'PUT'
+            })
+    }
+
+    updateES(questionId, question) {
+        return fetch(('http://10.0.0.164:8080/api/questionES/QID').replace('QID', questionId),
             {
                 body: JSON.stringify(question),
                 headers: {'Content-Type': 'application/json'},

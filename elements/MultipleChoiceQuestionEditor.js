@@ -101,9 +101,9 @@ class MultipleChoiceQuestionEditor extends React.Component {
         return (
             <ScrollView>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h1>{this.state.title}   | {this.state.points}</Text>
-                    <Text h2>{this.state.subtitle}</Text>
-                    <Text h4>{this.state.description}</Text>
+                    <Text h3>{this.state.title}   | {this.state.points}</Text>
+                    <Text h4>{this.state.subtitle}</Text>
+                    <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
                     {/*{this.renderOptions()}*/}
                     <View>
@@ -158,7 +158,6 @@ class MultipleChoiceQuestionEditor extends React.Component {
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
-                    defaultValue={this.state.points}
                     onChangeText={
                     points => this.updateForm({points: points})
                 }/>
