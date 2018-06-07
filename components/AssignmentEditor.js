@@ -15,11 +15,12 @@ class AssignmentEditor extends React.Component {
             id: '',
             title: '',
             description: '',
+            points: '0'
         }
 
         this.updateForm = this.updateForm.bind(this)
         this.updateAssignment = this.updateAssignment.bind(this)
-        this.findAssignment = this.updateAssignment.bind(this)
+        this.findAssignment = this.findAssignment.bind(this)
     }
 
     componentWillMount() {
@@ -45,6 +46,7 @@ class AssignmentEditor extends React.Component {
                 this.updateForm({id: assignment.id})
                 this.updateForm({title:  assignment.title})
                 this.updateForm({description: assignment.description})
+                this.updateForm({points: assignment.points})
             })
     }
 
@@ -53,7 +55,9 @@ class AssignmentEditor extends React.Component {
         assignment.id = this.state.id
         assignment.title = this.state.title
         assignment.description = this.state.description
+        assignment.points = this.state.points
         this.widgetService.updateAssignment(this.state.id, assignment)
+        this.props.navigation.goBack();
     }
 
 
@@ -70,15 +74,13 @@ class AssignmentEditor extends React.Component {
                 />
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3>{this.state.title} | {this.state.points}</Text>
+                    <Text h3> {this.state.title} | {this.state.points}</Text>
                     <Text h4>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
 
-                    <TextInput
+                    <TextInput editable={false} selectTextOnFocus={false}
                         style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
-                        onChangeText={(text) => this.setState({text})}
-                        value={this.state.description}
-                        placeholder="Type your answer"
+                        placeholder="Type your answer for the assignment"
                     />
                 </View>
 
@@ -107,6 +109,7 @@ class AssignmentEditor extends React.Component {
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
+                    defaultValue={this.state.points}
                     onChangeText={
                         points => this.updateForm({points: points})
                     }/>

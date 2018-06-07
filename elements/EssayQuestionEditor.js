@@ -61,6 +61,7 @@ class EssayQuestionEditor extends React.Component {
         question.description = this.state.description
         question.points = this.state.points
         this.questionService.updateES(this.state.id, question)
+        this.props.navigation.goBack();
     }
 
 

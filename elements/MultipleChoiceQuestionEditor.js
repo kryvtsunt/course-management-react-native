@@ -80,6 +80,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
         console.log(question.options)
         question.correctOption = this.state.value
         this.questionService.updateMC(this.state.id, question)
+        this.props.navigation.goBack();
     }
 
     // renderOptions() {
