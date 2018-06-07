@@ -17,8 +17,8 @@ class FillBlanksQuestionEditor extends React.Component {
             title: '',
             subtitle: '',
             description: '',
-            points: 0,
-            text: ''
+            points: '0',
+            blank: ''
         }
 
         this.updateForm = this.updateForm.bind(this)
@@ -44,13 +44,14 @@ class FillBlanksQuestionEditor extends React.Component {
     }
 
     findQuestion(questionId) {
-        this.questionService.findQuestionES(questionId)
+        this.questionService.findQuestionFB(questionId)
             .then((question) => {
                 this.updateForm({id: question.id})
                 this.updateForm({title: question.title})
                 this.updateForm({subtitle: question.subtitle})
                 this.updateForm({description: question.description})
                 this.updateForm({points: question.points})
+                this.updateForm({blank: question.blank})
             })
     }
 
@@ -61,6 +62,7 @@ class FillBlanksQuestionEditor extends React.Component {
         question.subtitle = this.state.subtitle
         question.description = this.state.description
         question.points = this.state.points
+        question.blank = this.state.blank
         this.questionService.updateES(this.state.id, question)
         this.props.navigation.goBack();
     }
@@ -83,6 +85,12 @@ class FillBlanksQuestionEditor extends React.Component {
                     <Text h4>{this.state.subtitle}</Text>
                     <Text h5>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
+                    <TextInput
+                        editable={false} selectTextOnFocus={false}
+                        style={{padding: 15, height: 150, width: 250, backgroundColor:'grey', borderColor: 'gray', borderWidth: 1}}
+                        value={this.state.blank}
+                        placeholder="Fill out the form"
+                    />
                 </View>
 
                 <Text>{'\n'}</Text>
@@ -114,19 +122,28 @@ class FillBlanksQuestionEditor extends React.Component {
                         text => this.updateForm({description: text})
                     }/>
 
+                <FormLabel>Description</FormLabel>
+                <FormInput
+                    defaultValue={this.state.description}
+                    onChangeText={
+                        text => this.updateForm({description: text})
+                    }/>
 
                 <FormLabel>Number of points</FormLabel>
                 <FormInput
                     onChangeText={
                         points => this.updateForm({points: points})
                     }/>
-
-                <TextInput
-                    style={{padding: 15, height: 150, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({text: text})}
-                    value={this.state.description}
-                    placeholder="Type your answer"
-                />
+                <Text>{'\n'}</Text>
+                <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                    <TextInput
+                        style={{padding: 15, height: 100, width: 250, backgroundColor:'white', borderColor: 'gray', borderWidth: 1}}
+                        value={this.state.blank}
+                        placeholder="Blank editor"
+                        onChangeText={(blank) => this.setState({blank})}
+                        multiline = {true}
+                    />
+                </View>
 
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
@@ -140,7 +157,11 @@ class FillBlanksQuestionEditor extends React.Component {
                         onPress={() =>this.props
                             .navigation
                             .goBack()}/>
-
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
+                <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
                 <Text>{'\n'}</Text>
             </ScrollView>
