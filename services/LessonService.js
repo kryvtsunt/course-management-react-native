@@ -1,12 +1,11 @@
 import 'es6-symbol/implement';
-
 // const Lesson_API_URL =
 //     'https://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson';
 
 
-
+const HOST = 'http://10.0.0.164:8080';
 const Lesson_API_URL =
-    'http://10.0.0.164:8080/api/course/CID/module/MID/lesson';
+    HOST + '/api/course/CID/module/MID/lesson';
 
 let _singleton = Symbol();
 

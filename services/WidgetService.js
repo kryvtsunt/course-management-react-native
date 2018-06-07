@@ -1,13 +1,20 @@
 import 'es6-symbol/implement';
 
-const WIDGET_URL =
-    'http://10.0.0.164:8080/api/topic/TID/widget';
-const EXAM_URL =
-    'http://10.0.0.164:8080/api/topic/TID/exam';
-const ASSIGNMENT_URL =
-    'http://10.0.0.164:8080/api/topic/TID/assignment';
 // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
+
+
+const HOST = 'http://10.0.0.164:8080';
+const WIDGET_URL =
+    HOST + '/api/topic/TID/widget';
+const EXAM_URL =
+    HOST + '/api/topic/TID/exam';
+const ASSIGNMENT_URL =
+    HOST + '/api/topic/TID/assignment';
+const E_URL =
+    HOST + '/api/exam/EID';
+const A_URL =
+    HOST + '/api/assignment/AID';
 
 let _singleton = Symbol();
 
@@ -48,6 +55,14 @@ export default class WidgetService {
             .then(response => (response.json()))
     }
 
+    deleteExam(examId) {
+        return fetch(E_URL.replace('EID', examId),
+            {
+                method: 'DELETE'
+            })
+            .then(response => (response.json()))
+    }
+
     createAssignment(topicId, assignment) {
         return fetch(ASSIGNMENT_URL.replace('TID', topicId),
             {
@@ -58,16 +73,8 @@ export default class WidgetService {
             .then(response => (response.json()))
     }
 
-    deleteExam(examId) {
-        return fetch('http://10.0.0.164:8080/api/exam/EID/'.replace('EID', examId),
-            {
-                method: 'DELETE'
-            })
-            .then(response => (response.json()))
-    }
-
     deleteAssignment(assignmentId) {
-        return fetch('http://10.0.0.164:8080/api/assignment/AID/'.replace('AID', assignmentId),
+        return fetch(A_URL.replace('AID', assignmentId),
             {
                 method: 'DELETE'
             })
@@ -75,7 +82,7 @@ export default class WidgetService {
     }
 
     updateAssignment(assignmentId, assignment) {
-        return fetch(('http://10.0.0.164:8080/api/assignment/AID').replace('AID', assignmentId),
+        return fetch(A_URL.replace('AID', assignmentId),
             {
                 body: JSON.stringify(assignment),
                 headers: {'Content-Type': 'application/json'},
@@ -84,7 +91,7 @@ export default class WidgetService {
     }
 
     findAssignment(assignmentId) {
-        return fetch(('http://10.0.0.164:8080/api/assignment/AID').replace('AID', assignmentId))
+        return fetch(A_URL.replace('AID', assignmentId))
             .then(response => (response.json()))
     }
 

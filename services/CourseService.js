@@ -1,9 +1,9 @@
 import 'es6-symbol/implement';
-
 // const COURSE_API_URL =
 //     'https://tk-course-management.herokuapp.com/api/course';
+const HOST = 'http://10.0.0.164:8080';
 const COURSE_API_URL=
-    'http://10.0.0.164:8080/api/course';
+    HOST + '/api/course';
 
 let _singleton = Symbol();
 

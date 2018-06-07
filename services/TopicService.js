@@ -4,8 +4,9 @@ import 'es6-symbol/implement';
 //     'https://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
 
 
+const HOST = 'http://10.0.0.164:8080';
 const Topic_API_URL =
-    'http://10.0.0.164:8080/api/course/CID/module/MID/lesson/LID/topic';
+    HOST + '/api/course/CID/module/MID/lesson/LID/topic';
 
 let _singleton = Symbol();
 

@@ -109,6 +109,10 @@ class MultipleChoiceQuestionEditor extends React.Component {
                     }}
                 />
                 <Text>{'\n'}</Text>
+                <View style={{flex: 1, paddingLeft: 10}}>
+                </View>
+                <View style={{flex: 1, paddingRight: 10}}>
+                </View>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <Text h3>{this.state.title}  | {this.state.points}</Text>
                     <Text h4>{this.state.subtitle}</Text>
