@@ -74,7 +74,7 @@ class AssignmentEditor extends React.Component {
                 />
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3     style={{
+                    <Text h3 style={{
                         marginHorizontal: 30,
                         marginVertical: 3
                     }}>{this.state.title} | {this.state.points}</Text>

@@ -55,7 +55,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 this.updateForm({subtitle: question.subtitle})
                 this.updateForm({description: question.description})
                 this.updateForm({points: question.points})
-                if ((question.options !== undefined)&&(question.options !== null)) {
+                if ((question.options !== undefined) && (question.options !== null)) {
                     this.updateForm({
                         options: question.options.split(',').map((item, index) => ({
                             label: item,
@@ -112,7 +112,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 />
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <Text>{'\n'}</Text>
-                    <Text h3     style={{
+                    <Text h3 style={{
                         marginHorizontal: 30,
                         marginVertical: 3
                     }}>{this.state.title} | {this.state.points}</Text>
@@ -127,7 +127,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
                     <Text h5 style={{
                         marginHorizontal: 50,
                         marginVertical: 8
-                    }}>{" [ correct choice is "+this.state.value+" ] "}</Text>
+                    }}>{" [ correct choice is " + this.state.value + " ] "}</Text>
                     <Text>{'\n'}</Text>
                     {/*{this.renderOptions()}*/}
                     <View>

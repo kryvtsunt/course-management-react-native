@@ -201,20 +201,20 @@ class ExamEditor extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                <Button
-                    buttonStyle={{
-                        backgroundColor: "green",
-                        width: 250,
-                        height: 45,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius: 5,
-                        padding: 5,
-                        margin: 5,
-                    }}
-                    onPress={this.createQuestion}
-                    color="white"
-                    title="Add"/>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
+                        onPress={this.createQuestion}
+                        color="white"
+                        title="Add"/>
                 </View>
             </ScrollView>
         )

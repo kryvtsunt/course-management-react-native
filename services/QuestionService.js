@@ -5,9 +5,9 @@ import 'es6-symbol/implement';
 const HOST = 'http://10.0.0.164:8080';
 
 const QUESTION_URL =
-    HOST+'/api/exam/EID/question';
+    HOST + '/api/exam/EID/question';
 const Q_URL =
-    HOST+'/api/question/QID';
+    HOST + '/api/question/QID';
 
 
 let _singleton = Symbol();
@@ -30,22 +30,22 @@ export default class QuestionService {
     }
 
     findQuestionMC(questionId) {
-        return fetch(Q_URL.replace('question','questionMC').replace('QID', questionId))
+        return fetch(Q_URL.replace('question', 'questionMC').replace('QID', questionId))
             .then(response => (response.json()))
     }
 
     findQuestionES(questionId) {
-        return fetch(Q_URL.replace('question','questionES').replace('QID', questionId))
+        return fetch(Q_URL.replace('question', 'questionES').replace('QID', questionId))
             .then(response => (response.json()))
     }
 
     findQuestionFB(questionId) {
-        return fetch(Q_URL.replace('question','questionFB').replace('QID', questionId))
+        return fetch(Q_URL.replace('question', 'questionFB').replace('QID', questionId))
             .then(response => (response.json()))
     }
 
     findQuestionTF(questionId) {
-        return fetch(Q_URL.replace('question','questionTF').replace('QID', questionId))
+        return fetch(Q_URL.replace('question', 'questionTF').replace('QID', questionId))
             .then(response => (response.json()))
     }
 
@@ -78,6 +78,7 @@ export default class QuestionService {
             })
             .then(response => (response.json()))
     }
+
     createES(examId, question) {
         return fetch((QUESTION_URL + 'ES').replace('EID', examId),
             {
@@ -89,34 +90,35 @@ export default class QuestionService {
     }
 
     deleteMC(questionId) {
-        return fetch(Q_URL.replace('question','questionMC').replace('QID', questionId),
+        return fetch(Q_URL.replace('question', 'questionMC').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
 
     deleteTF(questionId) {
-        return fetch(Q_URL.replace('question','questionTF').replace('QID', questionId),
+        return fetch(Q_URL.replace('question', 'questionTF').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
+
     deleteFB(questionId) {
-        return fetch(Q_URL.replace('question','questionFB').replace('QID', questionId),
+        return fetch(Q_URL.replace('question', 'questionFB').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
 
     deleteES(questionId) {
-        return fetch(Q_URL.replace('question','questionES').replace('QID', questionId),
+        return fetch(Q_URL.replace('question', 'questionES').replace('QID', questionId),
             {
                 method: 'DELETE'
             })
     }
 
     updateMC(questionId, question) {
-        return fetch((Q_URL.replace('question','questionMC').replace('QID', questionId)),
+        return fetch((Q_URL.replace('question', 'questionMC').replace('QID', questionId)),
             {
                 body: JSON.stringify(question),
                 headers: {'Content-Type': 'application/json'},
@@ -125,7 +127,7 @@ export default class QuestionService {
     }
 
     updateES(questionId, question) {
-        return fetch((Q_URL.replace('question','questionES').replace('QID', questionId)),
+        return fetch((Q_URL.replace('question', 'questionES').replace('QID', questionId)),
             {
                 body: JSON.stringify(question),
                 headers: {'Content-Type': 'application/json'},
@@ -134,7 +136,7 @@ export default class QuestionService {
     }
 
     updateTF(questionId, question) {
-        return fetch((Q_URL.replace('question','questionTF').replace('QID', questionId)),
+        return fetch((Q_URL.replace('question', 'questionTF').replace('QID', questionId)),
             {
                 body: JSON.stringify(question),
                 headers: {'Content-Type': 'application/json'},
@@ -143,7 +145,7 @@ export default class QuestionService {
     }
 
     updateFB(questionId, question) {
-        return fetch((Q_URL.replace('question','questionFB').replace('QID', questionId)),
+        return fetch((Q_URL.replace('question', 'questionFB').replace('QID', questionId)),
             {
                 body: JSON.stringify(question),
                 headers: {'Content-Type': 'application/json'},

@@ -3,7 +3,6 @@ import 'es6-symbol/implement';
 // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 
-
 const HOST = 'http://10.0.0.164:8080';
 const WIDGET_URL =
     HOST + '/api/topic/TID/widget';

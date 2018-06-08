@@ -3,7 +3,6 @@ import {View, ScrollView, TextInput} from 'react-native'
 import {Text, Button, CheckBox} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage, ListItem, Icon} from 'react-native-elements'
 import QuestionService from "../services/QuestionService";
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 
 class EssayQuestionEditor extends React.Component {
@@ -78,7 +77,7 @@ class EssayQuestionEditor extends React.Component {
                 />
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3     style={{
+                    <Text h3 style={{
                         marginHorizontal: 30,
                         marginVertical: 3
                     }}>{this.state.title} | {this.state.points}</Text>

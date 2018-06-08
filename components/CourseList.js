@@ -40,7 +40,7 @@ class CourseList extends Component {
                     {courseId: course.id})}
                 title={course.title}
                 key={index}
-                leftIcon={{name: "folder-open", color:"black"}}/>
+                leftIcon={{name: "folder-open", color: "black"}}/>
         ))
     }
 

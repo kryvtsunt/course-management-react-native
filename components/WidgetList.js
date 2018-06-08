@@ -75,7 +75,7 @@ class WidgetList extends Component {
                     onPress={() => this.navigator(widget)}
                     key={index}
                     title={widget.name}
-                    leftIcon={{name: "close", color:"red"}}
+                    leftIcon={{name: "close", color: "red"}}
                 />))
     }
 
@@ -88,7 +88,7 @@ class WidgetList extends Component {
                     title={exam.title}
                     leftIcon={{name: "border-color", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
-                    onPressRightIcon ={() => this.deleteExam(exam.id)}
+                    onPressRightIcon={() => this.deleteExam(exam.id)}
                 />))
     }
 
@@ -101,10 +101,9 @@ class WidgetList extends Component {
                     title={assignment.title}
                     leftIcon={{name: "assignment", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
-                    onPressRightIcon ={() => this.deleteAssignment(assignment.id)}
+                    onPressRightIcon={() => this.deleteAssignment(assignment.id)}
                 />))
     }
-
 
 
     navigator(widget) {
@@ -154,14 +153,14 @@ class WidgetList extends Component {
             });
     }
 
-    deleteExam(examId){
+    deleteExam(examId) {
         this.widgetService.deleteExam(examId)
             .then(() => {
                 this.findAllExamsForTopic(this.state.topicId);
             });
     }
 
-    deleteAssignment(assignmentId){
+    deleteAssignment(assignmentId) {
         this.widgetService.deleteAssignment(assignmentId)
             .then(() => {
                 this.findAllAssignmentsForTopic(this.state.topicId);
@@ -190,20 +189,20 @@ class WidgetList extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                <Button
-                    buttonStyle={{
-                        backgroundColor: "green",
-                        width: 250,
-                        height: 45,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius: 5,
-                        padding: 5,
-                        margin: 5,
-                    }}
-                    onPress={this.createWidget}
-                    color="white"
-                    title="Add"/>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "green",
+                            width: 250,
+                            height: 45,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            padding: 5,
+                            margin: 5,
+                        }}
+                        onPress={this.createWidget}
+                        color="white"
+                        title="Add"/>
                 </View>
             </ScrollView>
         )

@@ -41,12 +41,12 @@ class TopicList extends Component {
         this.findAllTopicsForLesson(courseId, moduleId, lessonId)
     }
 
-    findAllTopicsForLesson(courseId, moduleId, lessonId){
+    findAllTopicsForLesson(courseId, moduleId, lessonId) {
         this.topicService.findAllTopicsForLesson(courseId, moduleId, lessonId)
             .then(topics => this.setState({topics}))
     }
 
-    renderTopics(){
+    renderTopics() {
         return this.state.topics.map(
             (topic, index) => (
                 <ListItem
@@ -54,7 +54,7 @@ class TopicList extends Component {
                         .navigate("WidgetList", {topicId: topic.id})}
                     key={index}
                     title={topic.title}
-                    leftIcon={{name: "label", color:"black"}}
+                    leftIcon={{name: "label", color: "black"}}
                 />))
     }
 

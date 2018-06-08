@@ -19,21 +19,21 @@ class ModuleList extends Component {
 
     componentDidMount() {
         const courseId = this.props.navigation.getParam("courseId", 1);
-        this.setState({courseId: courseId })
+        this.setState({courseId: courseId})
         this.findAllModulesForCourse(courseId);
     }
 
     componentWillReceiveProps() {
         const courseId = this.props.navigation.getParam("courseId", 1);
-        this.setState({courseId: courseId })
+        this.setState({courseId: courseId})
         this.findAllModulesForCourse(courseId);
     }
 
-    findAllModulesForCourse(courseId){
+    findAllModulesForCourse(courseId) {
         this.moduleService.findAllModulesForCourse(courseId).then(modules => this.setState({modules: modules}))
     }
 
-    renderModules(){
+    renderModules() {
         return this.state.modules.map((module, index) => (
             <ListItem
                 onPress={() => this.props.navigation
@@ -43,7 +43,7 @@ class ModuleList extends Component {
                     })}
                 key={index}
                 title={module.title}
-                leftIcon={{name: "folder", color:"black"}}
+                leftIcon={{name: "folder", color: "black"}}
             />
         ))
     }

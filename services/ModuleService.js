@@ -9,7 +9,6 @@ const MODULE_API_URL =
     HOST + '/api/course/CID/module';
 
 
-
 let _singleton = Symbol();
 
 export default class ModuleService {

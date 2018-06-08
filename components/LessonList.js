@@ -5,9 +5,10 @@ import LessonService from '../services/LessonService'
 
 class LessonList extends Component {
     static navigationOptions = {title: 'Lessons'}
+
     constructor(props) {
         super(props)
-        this.lessonService  = LessonService.instance
+        this.lessonService = LessonService.instance
         this.state = {
             lessons: [],
             courseId: 1,
@@ -17,6 +18,7 @@ class LessonList extends Component {
         this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
         this.renderLessons = this.renderLessons.bind(this);
     }
+
     componentDidMount() {
         const {navigation} = this.props;
         const courseId = navigation.getParam("courseId")
@@ -35,30 +37,33 @@ class LessonList extends Component {
         this.findAllLessonsForModule(courseId, moduleId);
     }
 
-    findAllLessonsForModule(courseId, moduleId){
+    findAllLessonsForModule(courseId, moduleId) {
         this.lessonService.findAllLessonsForModule(courseId, moduleId)
             .then(lessons => this.setState({lessons}))
     }
 
-    renderLessons(){
+    renderLessons() {
         return this.state.lessons.map(
             (lesson, index) => (
                 <ListItem
                     onPress={() => this.props.navigation
-                        .navigate("TopicList", {lessonId: lesson.id, courseId:
-                        this.state.courseId, moduleId: this.state.moduleId})}
+                        .navigate("TopicList", {
+                            lessonId: lesson.id, courseId:
+                            this.state.courseId, moduleId: this.state.moduleId
+                        })}
                     key={index}
                     title={lesson.title}
-                    leftIcon={{name: "bookmark", color:"black"}}
+                    leftIcon={{name: "bookmark", color: "black"}}
                 />))
     }
 
     render() {
-        return(
+        return (
             <View style={{padding: 15}}>
                 {this.renderLessons()}
             </View>
         )
     }
 }
+
 export default LessonList
