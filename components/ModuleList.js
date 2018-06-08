@@ -42,7 +42,9 @@ class ModuleList extends Component {
                         this.state.courseId, moduleId: module.id
                     })}
                 key={index}
-                title={module.title}/>
+                title={module.title}
+                leftIcon={{name: "folder", color:"black"}}
+            />
         ))
     }
 

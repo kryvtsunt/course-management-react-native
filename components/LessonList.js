@@ -48,7 +48,9 @@ class LessonList extends Component {
                         .navigate("TopicList", {lessonId: lesson.id, courseId:
                         this.state.courseId, moduleId: this.state.moduleId})}
                     key={index}
-                    title={lesson.title}/>))
+                    title={lesson.title}
+                    leftIcon={{name: "bookmark", color:"black"}}
+                />))
     }
 
     render() {

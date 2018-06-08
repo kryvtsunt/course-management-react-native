@@ -39,7 +39,8 @@ class CourseList extends Component {
                 onPress={() => this.props.navigation.navigate("ModuleList",
                     {courseId: course.id})}
                 title={course.title}
-                key={index}/>
+                key={index}
+                leftIcon={{name: "folder-open", color:"black"}}/>
         ))
     }
 

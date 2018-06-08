@@ -3,7 +3,7 @@ import 'es6-symbol/implement';
 //     'https://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson';
 
 
-const HOST = 'http://10.110.209.150:8080';
+const HOST = 'http://10.0.0.164:8080';
 const Lesson_API_URL =
     HOST + '/api/course/CID/module/MID/lesson';
 

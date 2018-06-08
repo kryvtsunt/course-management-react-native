@@ -53,7 +53,9 @@ class TopicList extends Component {
                     onPress={() => this.props.navigation
                         .navigate("WidgetList", {topicId: topic.id})}
                     key={index}
-                    title={topic.title}/>))
+                    title={topic.title}
+                    leftIcon={{name: "label", color:"black"}}
+                />))
     }
 
     render() {

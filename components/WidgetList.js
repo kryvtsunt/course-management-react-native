@@ -99,7 +99,7 @@ class WidgetList extends Component {
                     onPress={() => this.props.navigation.navigate("AssignmentEditor", {assignmentId: assignment.id})}
                     key={index}
                     title={assignment.title}
-                    leftIcon={{name: "attachment", color: "black"}}
+                    leftIcon={{name: "assignment", color: "black"}}
                     rightIcon={{name: "close", color: "red"}}
                     onPressRightIcon ={() => this.deleteAssignment(assignment.id)}
                 />))
@@ -165,7 +165,7 @@ class WidgetList extends Component {
         this.widgetService.deleteAssignment(assignmentId)
             .then(() => {
                 this.findAllAssignmentsForTopic(this.state.topicId);
-            });
+            })
     }
 
     render() {

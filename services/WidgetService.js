@@ -4,7 +4,7 @@ import 'es6-symbol/implement';
 
 
 
-const HOST = 'http://10.110.209.150:8080';
+const HOST = 'http://10.0.0.164:8080';
 const WIDGET_URL =
     HOST + '/api/topic/TID/widget';
 const EXAM_URL =
@@ -60,7 +60,6 @@ export default class WidgetService {
             {
                 method: 'DELETE'
             })
-            .then(response => (response.json()))
     }
 
     createAssignment(topicId, assignment) {
@@ -78,7 +77,6 @@ export default class WidgetService {
             {
                 method: 'DELETE'
             })
-            .then(response => (response.json()))
     }
 
     updateAssignment(assignmentId, assignment) {

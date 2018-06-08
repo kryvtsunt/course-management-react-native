@@ -43,6 +43,7 @@ class MultipleChoiceQuestionEditor extends React.Component {
     }
 
     updateForm(newState) {
+
         this.setState(newState)
     }
 
@@ -55,7 +56,6 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 this.updateForm({description: question.description})
                 this.updateForm({points: question.points})
                 if ((question.options !== undefined)&&(question.options !== null)) {
-                    // console.log("tut" + question.options)
                     this.updateForm({
                         options: question.options.split(',').map((item, index) => ({
                             label: item,
@@ -63,12 +63,14 @@ class MultipleChoiceQuestionEditor extends React.Component {
                         }))
                     })
                 }
-                // console.log("tut" + this.state.options)
+                console.log(this.state.correctOption)
                 this.updateForm({value: question.correctOption})
+                console.log(this.state.correctOption)
             })
     }
 
     updateQuestion() {
+        console.log(this.state.correctOption)
         let question = {};
         question.id = this.state.id
         question.title = this.state.title
@@ -110,17 +112,29 @@ class MultipleChoiceQuestionEditor extends React.Component {
                 />
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                     <Text>{'\n'}</Text>
-                    <Text h3>{this.state.title} | {this.state.points}</Text>
-                    <Text h4>{this.state.subtitle}</Text>
-                    <Text h5>{this.state.description}</Text>
+                    <Text h3     style={{
+                        marginHorizontal: 30,
+                        marginVertical: 3
+                    }}>{this.state.title} | {this.state.points}</Text>
+                    <Text h4 style={{
+                        marginHorizontal: 40,
+                        marginVertical: 3
+                    }}>{this.state.subtitle}</Text>
+                    <Text h5 style={{
+                        marginHorizontal: 50,
+                        marginVertical: 5
+                    }}>{this.state.description}</Text>
+                    <Text h5 style={{
+                        marginHorizontal: 50,
+                        marginVertical: 8
+                    }}>{" [ correct choice is "+this.state.value+" ] "}</Text>
                     <Text>{'\n'}</Text>
                     {/*{this.renderOptions()}*/}
                     <View>
                         <RadioForm
                             radio_props={this.state.options}
-                            initial={this.state.value}
+                            initial={-1}
                             onPress={(value) => {
-                                console.log(value)
                                 this.setState({value: value})
                             }}
                         />

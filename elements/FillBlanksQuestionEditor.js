@@ -118,9 +118,18 @@ class FillBlanksQuestionEditor extends React.Component {
                 />
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3>{this.state.title} | {this.state.points}</Text>
-                    <Text h4>{this.state.subtitle}</Text>
-                    <Text h5>{this.state.description}</Text>
+                    <Text h3     style={{
+                        marginHorizontal: 30,
+                        marginVertical: 3
+                    }}>{this.state.title} | {this.state.points}</Text>
+                    <Text h4 style={{
+                        marginHorizontal: 40,
+                        marginVertical: 3
+                    }}>{this.state.subtitle}</Text>
+                    <Text h5 style={{
+                        marginHorizontal: 50,
+                        marginVertical: 5
+                    }}>{this.state.description}</Text>
                     <Text
                         style={{
                             marginHorizontal: 80,

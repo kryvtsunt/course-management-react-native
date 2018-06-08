@@ -78,23 +78,30 @@ class EssayQuestionEditor extends React.Component {
                 />
                 <Text>{'\n'}</Text>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                    <Text h3>{this.state.title} | {this.state.points}</Text>
-                    <Text h4>{this.state.subtitle}</Text>
-                    <Text h5>{this.state.description}</Text>
+                    <Text h3     style={{
+                        marginHorizontal: 30,
+                        marginVertical: 3
+                    }}>{this.state.title} | {this.state.points}</Text>
+                    <Text h4 style={{
+                        marginHorizontal: 40,
+                        marginVertical: 3
+                    }}>{this.state.subtitle}</Text>
+                    <Text h5 style={{
+                        marginHorizontal: 50,
+                        marginVertical: 5
+                    }}>{this.state.description}</Text>
                     <Text>{'\n'}</Text>
                     <TextInput
                         editable={false}
                         selectTextOnFocus={false}
                         style={{
                             padding: 15,
-                            height: 150,
+                            height: 300,
                             width: 250,
                             backgroundColor: 'white',
                             borderColor: 'gray',
                             borderWidth: 2
                         }}
-                        onChangeText={(text) => this.setState({text})}
-                        value={this.state.description}
                         placeholder="Type your answer"
                     />
                 </View>
